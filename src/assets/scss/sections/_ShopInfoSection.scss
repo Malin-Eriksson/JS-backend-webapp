@@ -1,0 +1,39 @@
+hr {
+    border: 2px solid $color-dark-grey;
+
+}
+.shop-info {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 60px;
+
+    .shop-info-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        
+    h1 {
+        font-size: $font-size-20;
+        font-weight: $font-weight-bold;
+    }
+    p {
+        text-align: center;
+    }
+
+    a {
+        background-color: $color-white;
+        color: $color-black;
+        width: 36px;
+        height: 36px;
+        margin-bottom: 15px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px 5px $color-shadow;
+    }
+
+    }
+
+}

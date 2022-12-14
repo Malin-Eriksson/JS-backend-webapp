@@ -1,0 +1,122 @@
+.product-grid {
+
+    .container {
+
+    
+        h1 {
+            font-size: $font-size-20;
+            font-weight: $font-weight-bold;
+            text-align: center;
+            margin-bottom: 30px; 
+        }
+    }
+
+    .product-info {
+        text-align: center;
+        width: 255px;
+    }
+
+    .card {
+        display: inline-flex;
+        border: none;
+        
+
+        img,
+        .card-img {
+            height: 210px;
+            width: 255px;
+            background-color: $color-gradient-light;
+            position: relative;
+
+            .card-menu {
+                display: none;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                .menu-link {
+                    background-color: $color-white;
+                    color: $color-black;
+                    width: 36px;
+                    height: 36px;
+                    margin-bottom: 15px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    box-shadow: 0 0 10px 5px $color-shadow;
+                    position: relative;
+                    border: none;
+                    outline: none;
+    
+                    &:hover {
+                        color: $color-white;
+                        background-color: $color-black;    
+                    }
+                }
+            }
+            .btn-theme {
+                display: none;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                height: 50px;
+            }
+        }
+
+        .card-body {
+            text-align: center;
+            width: 255px;
+
+            .card-category {
+                font-size: $font-size-13;
+                font-weight: $font-weight-medium;
+                color: $color-dark-grey;
+            }
+
+            .card-title {
+                font-size: $font-size-16;
+                font-weight: $font-weight-semibold;
+            }
+
+            .card-rating {
+                color: $color-theme;
+            }
+    
+            .card-price {
+                font-size: $font-size-18;
+                font-weight: $font-weight-semibold;    
+            }
+
+            p {
+                margin: 5px 0 8px 0;
+            }
+        }
+
+        &:hover {
+
+            .card-menu {
+                display: block;
+            }
+
+            .btn-theme {
+                display: flex;
+            }
+        }
+
+    }
+}
+
+
+    
+@media (min-width: 1200px) {
+        .product-grid {
+            max-width: 1110px;
+        }
+}
+
+
+
+

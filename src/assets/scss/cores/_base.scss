@@ -1,0 +1,73 @@
+// BODY GENERAL
+body {
+    font-family: $font-poppins, sans-serif;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-16;
+    color: $color-black;
+}
+
+// BACKGROUNDS
+.bg-theme {
+    background-color: $color-theme;
+}
+
+.gradient-grey {
+    background: $color-gradient-dark;
+    background: linear-gradient(90deg, $color-gradient-dark 0%, $color-gradient-light 100%);
+}
+
+
+// LINKS GENERAL
+a {
+    color: $color-black;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+        color: $color-theme;
+    }
+}
+
+
+// BUTTON WITH THEME COLOR
+.btn-theme {
+    position: relative;
+    text-align: center;
+    background-color: $color-theme;
+    color: $color-white;
+    padding: 25px 50px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+
+    .btn-theme-left,
+    .btn-theme-right {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+    }
+    .btn-theme-left {
+        top: 10px;
+        left: 10px;
+        border-left: 2px solid $color-white;
+        border-top: 2px solid $color-white;
+    }
+    .btn-theme-right {
+        bottom: 10px;
+        right: 10px;
+        border-right: 2px solid $color-white;
+        border-bottom: 2px solid $color-white;
+    }
+
+    &:hover {
+        background-color: $color-black;
+        color: $color-white;
+    }
+}
+
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: $max-width;
+    }
+
+}

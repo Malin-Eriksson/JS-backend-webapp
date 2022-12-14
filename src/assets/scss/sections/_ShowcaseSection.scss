@@ -1,0 +1,34 @@
+.showcase {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    .img-left {
+        margin-left: -120px;
+    }
+
+    .img-right {
+        margin-right: -120px;
+    }
+
+    .showcase-body {
+        text-align: center;
+        
+        h1 {
+            font-size: $font-size-65;
+            font-weight: $font-weight-extra-bold;
+        }
+
+        p {
+            margin-top: 50px;
+            margin-bottom: 35px;
+            font-size: $font-size-20;
+        }
+    }
+}
+
+header {
+    margin-bottom: 135px;
+}

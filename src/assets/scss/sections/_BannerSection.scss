@@ -1,0 +1,80 @@
+.banners {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 150px;
+    margin-top: 65px;
+
+    h1 {
+        font-size: $font-size-45;
+        font-weight: $font-weight-bold;
+        margin-bottom: 35px;
+    }
+
+    .banner-1 {
+        position: relative;
+        margin-right: 15px;
+
+        .btn-theme {
+            background-color: $color-black;
+            color: $color-white;
+
+            &:hover {
+                background-color: $color-white;
+                color: $color-black;
+
+                .btn-theme-left {
+                    border-left: 2px solid $color-black;
+                    border-top: 2px solid $color-black;
+                }
+                .btn-theme-right {
+                    border-right: 2px solid $color-black;
+                    border-bottom: 2px solid $color-black;
+                }
+            }
+        }
+        .title-1 {
+            position: absolute;
+            top: 100px;
+            left: 450px;
+        }
+    }
+
+    .banner-2 {
+        position: relative;
+        margin-left: 15px;
+
+        .btn-theme {
+            background-color: $color-white;
+            color: $color-black;
+
+            &:hover {
+                background-color: $color-black;
+                color: $color-white;
+
+                .btn-theme-left {
+                    border-left: 2px solid $color-white;
+                    border-top: 2px solid $color-white;
+                }
+                .btn-theme-right {
+                    border-right: 2px solid $color-white;
+                    border-bottom: 2px solid $color-white;
+                }
+            }
+
+            .btn-theme-left {
+                border-left: 2px solid $color-black;
+                border-top: 2px solid $color-black;
+            }
+            .btn-theme-right {
+                border-right: 2px solid $color-black;
+                border-bottom: 2px solid $color-black;
+            }
+        }
+        .title-2 {
+            position: absolute;
+            top: 100px;
+            left: 65px;
+        }
+    }
+
+}
