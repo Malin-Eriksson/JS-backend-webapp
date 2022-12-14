@@ -46,6 +46,7 @@ const ProductProvider: React.FC<ProductProviderType> = ({children}) => {
         setProducts(await res.json())
     }
 
+
     const getFeatured = async (take=0) => {
         let url = `${baseUrl}/featuredProducts`
 

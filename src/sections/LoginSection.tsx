@@ -58,7 +58,7 @@ interface LoginDataType {
 
 
   return (
-    <section className="signUpForm">
+    <section className="loginForm">
       <div className="container">
         
         {signUpsubmitted ? (<FormNotification notificationType='success' title='You are logged in!' text=''/>) : (<></>)}

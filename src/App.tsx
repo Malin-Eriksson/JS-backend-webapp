@@ -14,6 +14,8 @@ import SearchView from './views/SearchView';
 import WishlistView from './views/WishlistView';
 import LoginView from './views/LoginView';
 import SignUpView from './views/SignUpView';
+import ApiView from './views/ApiView'
+import UpdateProductView from './views/UpdateProductView';
 
 
 const App: React.FC = () => {
@@ -30,8 +32,10 @@ const App: React.FC = () => {
         <Route path='/search' element={<SearchView />}/>
         <Route path='/compare' element={<CompareView />}/>
         <Route path='/wishlist' element={<WishlistView />}/>
-        <Route path='/login' element={<LoginView />}/>
-        <Route path='/signup' element={<SignUpView />}/>
+        <Route path='/login' element={<LoginView/>}/>
+        <Route path='/signup' element={<SignUpView/>}/>
+        <Route path='/api' element={<ApiView />}/>
+        <Route path='/update' element={<UpdateProductView/>}/>
         <Route path='*' element={<NotFoundView />}/>
       </Routes>
     </ProductProvider>
@@ -39,5 +43,5 @@ const App: React.FC = () => {
   </BrowserRouter>
   );
 }
- 
+  
 export default App;
