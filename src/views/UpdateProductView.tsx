@@ -9,7 +9,7 @@ import UpdateProductSection from '../sections/UpdateProductSection'
 const UpdateProductView: React.FC = () => {
 
   const {id} = useParams()
-  const { product, getProduct, update } = useProductContext() as ProductContextType
+  const { product, getProduct} = useProductContext() as ProductContextType
 
   return (
     <>

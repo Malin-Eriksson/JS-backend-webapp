@@ -54,3 +54,22 @@ export const validatePassword = (value: string, passwordRegEx: RegExp = /^(?=.*[
     else 
         return ''
 }
+
+// Product validation
+    // Price validation
+    export const validatePrice = (value: number, PriceRegEx: RegExp = /^\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?/) => {
+        if (value == 0)
+            return `Price is required`
+        else if (!PriceRegEx.test(value))
+            return `Price must be a number`
+        else 
+            return ''
+    }
+
+    // // Rating validation
+    // export const validateRating = (value: number, PriceRegEx: RegExp = /^[1-5]$/) => {
+    //     if (!PriceRegEx.test(value))
+    //         return `Rating must be number 1-5`
+    //     else 
+    //         return ''
+    // }

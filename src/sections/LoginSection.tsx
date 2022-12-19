@@ -9,45 +9,48 @@ interface LoginDataType {
   }
 
   const LoginSection: React.FC = () => {
-    const signUpForm_default: LoginDataType = { signUpEmail: '', password: '' } 
-    const [signUpFormData, setSignUpFormData] = useState<LoginDataType>(signUpForm_default)
-    const [signUpErrors, setSignUpErrors] = useState<LoginDataType>(signUpForm_default)
-    const [signUpsubmitted, setSignUpSubmitted] = useState<boolean>(false)
-    const [failedSignUpSubmit, setSignUpFailedSubmit] = useState<boolean>(false)
+    const loginForm_default: LoginDataType = { signUpEmail: '', password: '' } 
+    const [loginFormData, setLoginFormData] = useState<LoginDataType>(loginForm_default)
+    const [loginErrors, setLoginErrors] = useState<LoginDataType>(loginForm_default)
+    const [loginSubmitted, setLoginSubmitted] = useState<boolean>(false)
+    const [failedLoginSubmit, setLoginFailedSubmit] = useState<boolean>(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {id, value} = e.target
-        setSignUpFormData({...signUpFormData, [id]: value})
+        setLoginFormData({...loginFormData, [id]: value})
     
         if (id === 'signUpEmail')
-        setSignUpErrors({...signUpErrors, [id]: validateSignUpEmail(value)})
+        setLoginErrors({...loginErrors, [id]: validateSignUpEmail(value)})
 
         if (id === 'password')
-        setSignUpErrors({...signUpErrors, [id]: validatePassword(value)})
+        setLoginErrors({...loginErrors, [id]: validatePassword(value)})
     }
-
+   
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
-        setSignUpSubmitted(false)
-        setSignUpFailedSubmit(false)
+        setLoginSubmitted(false)
+        setLoginFailedSubmit(false)
   
-        if (signUpFormData.signUpEmail !== '' && signUpFormData.password !== '')
-          if (signUpErrors.signUpEmail === '' && signUpErrors.password === '') {
+        if (loginFormData.signUpEmail !== '' && loginFormData.password !== '')
+          if (loginErrors.signUpEmail === '' && loginErrors.password === '') {
   
-            const result = await fetch('https://win22.webapi.azurewebsites.net/api/login', {
+            const result = await fetch('http://localhost:5000/api/authentication/login', {
               method: 'post',
               headers: {
                 'Content-type': 'application/json'
               },
-              body: JSON.stringify(signUpFormData)
+              body: JSON.stringify({
+                email: loginFormData.signUpEmail,
+                password: loginFormData.password
+              })
             })
 
             if (result.status === 200) {
-                setSignUpSubmitted(true)
-                setSignUpFormData(signUpForm_default)
+                setLoginSubmitted(true)
+                setLoginFormData(loginForm_default)
             } else {
-                setSignUpSubmitted(false)
-                setSignUpFailedSubmit(true)
+                setLoginSubmitted(false)
+                setLoginFailedSubmit(true)
             }
 
             const data = await result.json()
@@ -61,18 +64,18 @@ interface LoginDataType {
     <section className="loginForm">
       <div className="container">
         
-        {signUpsubmitted ? (<FormNotification notificationType='success' title='You are logged in!' text=''/>) : (<></>)}
-        {failedSignUpSubmit ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't access your account right now - please try again later"/>) : (<></>)}
+        {loginSubmitted ? (<FormNotification notificationType='success' title='You are logged in!' text=''/>) : (<></>)}
+        {failedLoginSubmit ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't access your account right now - please try again later"/>) : (<></>)}
         
         <h2>LOGIN</h2>
         <form onSubmit={handleSignUp} noValidate>
           <div>
-            <input id="signUpEmail" className={(signUpErrors?.signUpEmail ? 'error': '')} value={signUpFormData.signUpEmail} onChange={(e) => handleChange(e)} type="email" placeholder="Your e-mail address" />
-            <div className="errorMessage">{signUpErrors?.signUpEmail}</div>
+            <input id="signUpEmail" className={(loginErrors?.signUpEmail ? 'error': '')} value={loginFormData.signUpEmail} onChange={(e) => handleChange(e)} type="email" placeholder="Your e-mail address" />
+            <div className="errorMessage">{loginErrors?.signUpEmail}</div>
           </div>
           <div>
-            <input id="password" className={(signUpErrors?.password ? 'error': '')} value={signUpFormData.password} onChange={(e) => handleChange(e)} type="password" placeholder="Password" />
-            <div className="errorMessage">{signUpErrors?.password}</div>
+            <input id="password" className={(loginErrors?.password ? 'error': '')} value={loginFormData.password} onChange={(e) => handleChange(e)} type="password" placeholder="Password" />
+            <div className="errorMessage">{loginErrors?.password}</div>
           </div>
           <div className="formBtn">
             <button type="submit" className="btn-theme">LOG IN</button>

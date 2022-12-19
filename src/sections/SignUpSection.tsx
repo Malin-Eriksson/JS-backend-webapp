@@ -13,7 +13,7 @@ interface SignUpFormDataType {
     const signUpForm_default: SignUpFormDataType = { firstName: '', lastName: '', signUpEmail: '', password: '' } 
     const [signUpFormData, setSignUpFormData] = useState<SignUpFormDataType>(signUpForm_default)
     const [signUpErrors, setSignUpErrors] = useState<SignUpFormDataType>(signUpForm_default)
-    const [signUpsubmitted, setSignUpSubmitted] = useState<boolean>(false)
+    const [signUpSubmitted, setSignUpSubmitted] = useState<boolean>(false)
     const [failedSignUpSubmit, setSignUpFailedSubmit] = useState<boolean>(false)
 
     const handleSignUpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,15 +41,20 @@ interface SignUpFormDataType {
         if (signUpFormData.firstName !== '' && signUpFormData.lastName !== '' && signUpFormData.signUpEmail !== '' && signUpFormData.password !== '')
           if (signUpErrors.firstName === '' && signUpErrors.lastName === '' && signUpErrors.signUpEmail === '' && signUpErrors.password === '') {
   
-            const result = await fetch('https://win22.webapi.azurewebsites.net/api/signup', {
+            const result = await fetch('http://localhost:5000/api/authentication/signup', {
               method: 'post',
               headers: {
                 'Content-type': 'application/json'
               },
-              body: JSON.stringify(signUpFormData)
+              body: JSON.stringify({
+                firstName: signUpFormData.firstName,
+                lastName: signUpFormData.lastName,
+                email: signUpFormData.signUpEmail,
+                password: signUpFormData.password
+              })
             })
 
-            if (result.status === 200) {
+            if (result.status === 201) {
                 setSignUpSubmitted(true)
                 setSignUpFormData(signUpForm_default)
             } else {
@@ -67,7 +72,7 @@ interface SignUpFormDataType {
     <section className="signUpForm">
       <div className="container">
         
-        {signUpsubmitted ? (<FormNotification notificationType='success' title='Your account has been registered!' text=''/>) : (<></>)}
+        {signUpSubmitted ? (<FormNotification notificationType='success' title='Your account has been registered!' text=''/>) : (<></>)}
         {failedSignUpSubmit ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't create an account right now - please try again later"/>) : (<></>)}
         
         <h2>EMPLOYEE SIGN UP</h2>
