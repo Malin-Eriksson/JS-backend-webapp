@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import FormNotification from '../components/FormNotification'
-import { validatePrice, validateRating, validateText } from '../scripts/validation'
+import { 
+        //validatePrice, 
+        //validateRating, 
+        validateText } from '../scripts/validation'
 
 interface CreateProductType {
-
     name: string,
     description?: string,
     price: number,
@@ -32,8 +34,8 @@ const CreateProductSection: React.FC = () => {
       if (id === 'description')
         setCreateProductErrors({...createProductErrors, [id]: validateText(id, value)})
 
-      if (id === 'price')
-        setCreateProductErrors({...createProductErrors, [id]: validatePrice(id)})
+      // if (id === 'price')
+      //   setCreateProductErrors({...createProductErrors, [id]: validatePrice(id, value)})
 
       if (id === 'category')
         setCreateProductErrors({...createProductErrors, [id]: validateText(id, value)})
@@ -43,9 +45,9 @@ const CreateProductSection: React.FC = () => {
 
       if (id === 'imageName')
         setCreateProductErrors({...createProductErrors, [id]: validateText(id, value)})
-        
-      if (id === 'rating')
-        setCreateProductErrors({...createProductErrors, [id]: validateRating(id, value)})
+
+      // if (id === 'rating')
+      //   setCreateProductErrors({...createProductErrors, [id]: validateRating(id, value)})
 
 
     }
@@ -58,17 +60,24 @@ const CreateProductSection: React.FC = () => {
       if (createProductData.name !== '' && createProductData.description !== '' && createProductData.price !== 0 && createProductData.category !== '' && createProductData.tag !== '' && createProductData.imageName !== '' && createProductData.rating !== 0)
         if (createProductErrors.name === '' && createProductErrors.description === '' && createProductErrors.price === 0 && createProductErrors.category === '' && createProductErrors.tag === '' && createProductErrors.imageName === '' && createProductErrors.rating === 0) {
 
-          const result = await fetch('http://localhost:5000/api/authentication/create', {
+          const result = await fetch('http://localhost:5000/api/products/create', {
             method: 'post',
             headers: {
-              'Content-type': 'application/json'
+              'Content-type': 'application/json',
+              'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({
-        
+              name: createProductData.name,
+              description: createProductData.description,
+              price: createProductData.price,
+              category: createProductData.category,
+              tag: createProductData.tag, 
+              imageName: createProductData.imageName,
+              rating: createProductData.rating
             })
           })
 
-          if (result.status === 200) {
+          if (result.status === 201) {
               setCreateProductSubmitted(true)
               setCreateProductData(createProduct_default)
           } else {
@@ -85,10 +94,10 @@ const CreateProductSection: React.FC = () => {
       <section className="createProduct">
       <div className="container">
         
-        {createProductSubmitted ? (<FormNotification notificationType='success' title='Your account has been registered!' text=''/>) : (<></>)}
-        {failedCreateSubmit ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't create an account right now - please try again later"/>) : (<></>)}
+        {createProductSubmitted ? (<FormNotification notificationType='success' title='New product added' text=''/>) : (<></>)}
+        {failedCreateSubmit ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't add the new product - please try again later!"/>) : (<></>)}
         
-        <h2>EMPLOYEE SIGN UP</h2>
+        <h2>CREATE NEW PRODUCT</h2>
         <form onSubmit={handleCreateProduct} noValidate>
           <div>
             <input id="name" className={(createProductErrors?.name ? 'error': '')} value={createProductData.name} onChange={(e) => handleCreateProductChange(e)} type="text" placeholder="Product name" />
@@ -99,8 +108,8 @@ const CreateProductSection: React.FC = () => {
             <div className="errorMessage">{createProductErrors?.description}</div>
           </div>
           <div>
-            <input id="price" className={(createProductErrors?.price ? 'error': '')} value={createProductData.price} onChange={(e) => handleCreateProductChange(e)} type="number" placeholder="Price" />
-            <div className="errorMessage">{createProductErrors?.price}</div>
+            <input id="price" className={(createProductErrors?.price ? 'error': '')}  value={createProductData.price} onChange={(e) => handleCreateProductChange(e)} type="number" placeholder="Price" />
+            {/* <div className="errorMessage">{createProductErrors?.price}</div> */}
           </div>
           <div>
             <input id="category" className={(createProductErrors?.category ? 'error': '')} value={createProductData.category} onChange={(e) => handleCreateProductChange(e)} type="text" placeholder="Category" />
@@ -115,8 +124,8 @@ const CreateProductSection: React.FC = () => {
             <div className="errorMessage">{createProductErrors?.imageName}</div>
           </div>
           <div>
-            <input id="rating" className={(createProductErrors?.rating ? 'error': '')} value={createProductData.rating} onChange={(e) => handleCreateProductChange(e)} type="number" placeholder="Rating, 1-5" />
-            <div className="errorMessage">{createProductErrors?.rating}</div>
+            <input id="rating" className={(createProductErrors?.rating ? 'error': '')} value={createProductData.rating} onChange={(e) => handleCreateProductChange(e)} type="number" min="1" max="5" placeholder="Rating, 1-5" />
+            {/* <div className="errorMessage">{createProductErrors?.rating}</div> */}
           </div>
 
           <div className="formBtn">

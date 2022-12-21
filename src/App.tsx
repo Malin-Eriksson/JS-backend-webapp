@@ -17,6 +17,7 @@ import SignUpView from './views/SignUpView';
 import ApiView from './views/ApiView'
 import UpdateProductView from './views/UpdateProductView';
 import CreateProductView from './views/CreateProductView';
+import DeleteProductView from './views/DeleteProductView';
 
 
 const App: React.FC = () => {
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         <Route path='/api' element={<ApiView />}/>
         <Route path='/update' element={<UpdateProductView/>}/>
         <Route path='/create' element={<CreateProductView/>}/>
+        <Route path='/delete' element={<DeleteProductView />}/>
         <Route path='*' element={<NotFoundView />}/>
       </Routes>
     </ProductProvider>

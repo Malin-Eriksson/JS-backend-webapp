@@ -57,16 +57,34 @@ export const validatePassword = (value: string, passwordRegEx: RegExp = /^(?=.*[
 
 // Product validation
     // Price validation
-    export const validatePrice = (value: number, PriceRegEx: RegExp = /^\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?/) => {
-        if (value == 0)
-            return `Price is required`
-        else if (!PriceRegEx.test(value))
-            return `Price must be a number`
-        else 
-            return ''
-    }
 
-    // // Rating validation
+    // export const validatePrice = (elementName: string, value: number) => {    
+    //     if (value == 0)             console.log(`Price is required`)
+    //     else if (value < 0.1)       console.log(`Price is too low`)
+    //     else if (value > 100000)    console.log(`Price is too high`)
+    //     else                        return value
+    // }
+
+
+    // export const validatePrice = (elementName: string, value: string, PriceRegEx: RegExp = /^\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?/) => {
+    //     if (value == 0)
+    //         return `Price is required`
+    //     else if (!PriceRegEx.match(value))
+    //         return `Price must be a number`
+    //     else if (isNaN(value))
+    //         return `Price must be a number!`
+    //     else
+    //         return ''
+    // }
+
+    // Rating validation
+    // export const validateRating = (elementName: string, value: number) => {    
+    //     if (value < 1)              console.log(`Rating is too low`)
+    //     else if (value > 5)         console.log(`Rating is too high`)
+    //     else                        return value
+    // }
+
+
     // export const validateRating = (value: number, PriceRegEx: RegExp = /^[1-5]$/) => {
     //     if (!PriceRegEx.test(value))
     //         return `Rating must be number 1-5`
