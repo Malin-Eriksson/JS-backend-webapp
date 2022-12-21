@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { ProductItem } from '../models/ProductModels'
 import MenuIcon from './MenuIcon'
 import { currencyFormatter } from './utilities/currencyFormatter'
@@ -28,8 +27,8 @@ const ApiProducts: React.FC<ApiProductsType> = ({item}) => {
             <p>Rating: {item.rating}</p>
             <p>Image link: {item.imageName}</p> 
         </div>
-        <MenuIcon link='/delete' icon="fa-regular fa-trash" />
-        <MenuIcon link='/update' icon="fa-regular fa-wrench" />
+        <MenuIcon link={'/delete/' + item.articleNumber} icon="fa-regular fa-trash" />
+        <MenuIcon link={'/update/' + item.articleNumber }icon="fa-regular fa-wrench" />
     </div>
     </div> 
     </>

@@ -37,9 +37,9 @@ const App: React.FC = () => {
         <Route path='/login' element={<LoginView/>}/>
         <Route path='/signup' element={<SignUpView/>}/>
         <Route path='/api' element={<ApiView />}/>
-        <Route path='/update' element={<UpdateProductView/>}/>
+        <Route path='/update/:id' element={<UpdateProductView/>}/>
         <Route path='/create' element={<CreateProductView/>}/>
-        <Route path='/delete' element={<DeleteProductView />}/>
+        <Route path='/delete/:id' element={<DeleteProductView />}/>
         <Route path='*' element={<NotFoundView />}/>
       </Routes>
     </ProductProvider>

@@ -10,7 +10,7 @@ interface DeleteProductType {
 const DeleteProductSection: React.FC<DeleteProductType> = ({item}) => {
 
   const [deleteProduct, setDeleteProduct] = useState<boolean>(false)
-  const [deletefailed, setDeleteFailed] = useState<boolean>(false)
+  const [deleteFailed, setDeleteFailed] = useState<boolean>(false)
 
   const handleDeleteProduct = async (_id: string) => {
     setDeleteProduct(false)
@@ -40,7 +40,7 @@ const DeleteProductSection: React.FC<DeleteProductType> = ({item}) => {
     <div className='container'>
 
     {deleteProduct ? (<FormNotification notificationType='success' title='Product deleted' text=''/>) : (<></>)}
-    {deletefailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't delete the product - please try again later!"/>) : (<></>)}
+    {deleteFailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't delete the product - please try again later!"/>) : (<></>)}
 
 
       <form >

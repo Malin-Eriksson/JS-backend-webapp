@@ -1,76 +1,77 @@
 import React, { useState } from 'react'
+import { idText } from 'typescript'
 import FormNotification from '../components/FormNotification'
 import { currencyFormatter } from '../components/utilities/currencyFormatter'
 import { ProductItem } from '../models/ProductModels'
 
 interface UpdateProductType {
-  item: ProductItem
+item: ProductItem
 }
 
 const UpdateProductSection: React.FC<UpdateProductType> = ({item}) => {
-
   const [updateProduct, setUpdateProduct] = useState<boolean>(false)
   const [updateFailed, setUpdateFailed] = useState<boolean>(false)
 
-  const handleDeleteProduct = async (_id: string) => {
+
+
+  
+  const handleUpdateProduct = async (_id: string) => {
     setUpdateProduct(false)
     setUpdateFailed(false)
 
-    if (createProductData.name !== '' && createProductData.description !== '' && createProductData.price !== 0 && createProductData.category !== '' && createProductData.tag !== '' && createProductData.imageName !== '' && createProductData.rating !== 0)
-
     const result = await fetch(`http://localhost:5000/api/products/update`, {
-      method: 'put',
+      method: 'post',
       headers: {
         'Content-type': 'application/json',
         'authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
-      body: JSON.stringify({
-        name: createProductData.name,
-        description: createProductData.description,
-        price: createProductData.price,
-        category: createProductData.category,
-        tag: createProductData.tag, 
-        imageName: createProductData.imageName,
-        rating: createProductData.rating})
+      body: JSON.stringify({item})
     })
 
     if (result.status === 200) {
       setUpdateProduct(true)
-  } else {
-      setUpdateProduct(false)
-      setUpdateFailed(true)
-  }
+    } else {
+        setUpdateProduct(false)
+        setUpdateFailed(true)
+      }
 
   }
 
 
+    return (
+      <>
+      <section className='updateProduct'>
+        <div className='container'>
 
+          {updateProduct ? (<FormNotification notificationType='success' title='Product updated' text=''/>) : (<></>)}
+          {updateFailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't update the product - please try again later!"/>) : (<></>)}
 
-  return (
-    <section className='deleteProduct'>
-    <div className='container'>
+          <form>
+            <div>
+              <img src={item.imageName} />    
+            </div>
+            <h3>Product name</h3>
+            <input id="name" value={item.name} type='text' placeholder={item.name}/>
+            <h3>Description</h3>
+            <input id="description" type='text' placeholder={item.description}/> 
+            <h3>Price</h3>
+            <input id="price" type='text' placeholder={String(item.price)}/> 
+            <h3>Category</h3>
+            <input id="category" type='text' placeholder={item.category}/>  
+            <h3>Tag</h3>
+            <input id="tag" type='text' placeholder={item.tag}/> 
+            <h3>Image name</h3>
+            <input id="imageName" type='text' placeholder={item.imageName}/> 
+            <h3>Rating, 1-5</h3>
+            <input id="rating" type='number' placeholder={String(item.rating)}/> 
 
-    {updateProduct ? (<FormNotification notificationType='success' title='Product updated' text=''/>) : (<></>)}
-    {updateFailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't update the product - please try again later!"/>) : (<></>)}
+            <button onClick={() => handleUpdateProduct(item.articleNumber)}>UPDATE PRODUCT</button>
 
-
-      <form >
-        <div>
-          <img src={item.imageName} />
+          </form>
         </div>
-        <div>
-          <h3>{item.name}</h3>
-          <p>Article number: {item.articleNumber}</p>
-          <p>{item.tag}</p>
-          <p>{item.description}</p>
-          <p>{currencyFormatter(item.price)}</p>
-          <p>{item.rating}</p>
-        </div>
-      <button type='submit'>UPDATE PRODUCT</button>
-      </form>
-    </div>
-    </section>
-  )
-}
+      </section>
+      </>
+    )
+  }
 
 export default UpdateProductSection
