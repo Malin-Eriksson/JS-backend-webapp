@@ -1,7 +1,6 @@
 import React from 'react'
 import BreadcrumbSection from '../sections/BreadcrumbSection'
 import CreateProductSection from '../sections/CreateProductSection'
-// import CreateProductSection from '../sections/CreateProductSection'
 import FooterSection from '../sections/FooterSection'
 import MainMenuSection from '../sections/MainMenuSection'
 

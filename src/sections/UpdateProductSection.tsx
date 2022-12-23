@@ -2,41 +2,65 @@ import React, { useState } from 'react'
 import FormNotification from '../components/FormNotification'
 import { ProductItem } from '../models/ProductModels'
 
-
 interface UpdateProductType {
   item: ProductItem
 }
 
-
-
-const UpdateProductSection: React.FC<UpdateProductType> = () => {
+export const UpdateProductSection: React.FC<UpdateProductType> = ({item}) => {
   const [updateProduct, setUpdateProduct] = useState<boolean>(false)
-  const [updateFailed, setUpdateFailed] = useState<boolean>(false)
+  const [updateProductFailed, setUpdateProductFailed] = useState<boolean>(false)
 
 
-    const handleUpdateProduct = async (e: React.FormEvent) => {
+
+
+
+    const handleUpdateProduct = async (e: any) => {
       e.preventDefault()
       setUpdateProduct(false)
-      setUpdateFailed(false)
+      setUpdateProductFailed(false)
+      
+      console.log("hej")
+      
+
+
+      const product = {
+        articleNumber: e.target[0].value,
+        name: e.target[1].value,
+        description: e.target[2].value,
+        price: e.target[3].value,
+        category: e.target[4].value,
+        tag: e.target[5].value,
+        imageName: e.target[6].value,
+        rating: e.target[7].value
+      }
+
+    
+      console.log(product);
 
 
 
-    const result = await fetch(`http://localhost:5000/api/products/update`, {
+    const result = await fetch(`http://localhost:5000/api/products/update/${item.articleNumber}`, {
       method: 'put',
       headers: {
         'Content-type': 'application/json',
         'authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
+      body: JSON.stringify(product)
     })
 
-    if (result.status === 200) {
+    const data = await result.json()
+    console.log(data)
+
+    if (result.status === 201) {
       setUpdateProduct(true)
     } else {
-        setUpdateProduct(false)
-        setUpdateFailed(true)
-      }
-
+      setUpdateProduct(false)
+      setUpdateProductFailed(true)
+    }
   }
+
+  
+
 
 
     return (
@@ -45,26 +69,28 @@ const UpdateProductSection: React.FC<UpdateProductType> = () => {
         <div className='container'>
 
           {updateProduct ? (<FormNotification notificationType='success' title='Product updated' text=''/>) : (<></>)}
-          {updateFailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't update the product - please try again later!"/>) : (<></>)}
+          {updateProductFailed ? (<FormNotification notificationType='danger' title='Something went wrong!' text="We couln't update the product - please try again later!"/>) : (<></>)}
 
           <form onSubmit={handleUpdateProduct} noValidate>
             <div>
-              <img src={item.imageName} />    
+              <img src={item.imageName} alt='product'/>    
             </div>
+            <h3>Article number</h3>
+            <input type='text' className='form-control' defaultValue={item.articleNumber} />
             <h3>Product name</h3>
-            <input id="name" value={item.name} onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={item.name}/>
+            <input type='text' className='form-control' defaultValue={item.name} />
             <h3>Description</h3>
-            <input id="description" value={item.description} onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={item.description}/> 
+            <input type='text' className='form-control' defaultValue={item.description}  /> 
             <h3>Price</h3>
-            <input id="price" value={item.price} onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={String(item.price)}/> 
+            <input type='text' className='form-control' defaultValue={item.price} /> 
             <h3>Category</h3>
-            <input id="category" value={item.category}  onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={item.category}/>  
+            <input type='text' className='form-control'defaultValue={item.category}  />  
             <h3>Tag</h3>
-            <input id="tag" value={item.tag} onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={item.tag}/> 
+            <input type='text' className='form-control' defaultValue={item.tag} /> 
             <h3>Image name</h3>
-            <input id="imageName" value={item.imageName} onChange={(e) => handleUpdateProduct(e)} type='text' placeholder={item.imageName}/> 
+            <input className='form-control' type='text' defaultValue={item.imageName}  /> 
             <h3>Rating, 1-5</h3>
-            <input id="rating" value={item.rating} onChange={(e) => handleUpdateProduct(e)} type='number' placeholder={String(item.rating)} /> 
+            <input className='form-control' type='number' defaultValue={item.rating} /> 
 
             <button type='submit'>UPDATE PRODUCT</button>
 
@@ -74,5 +100,6 @@ const UpdateProductSection: React.FC<UpdateProductType> = () => {
       </>
     )
   }
+  
 
 export default UpdateProductSection
