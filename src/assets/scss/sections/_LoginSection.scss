@@ -1,0 +1,52 @@
+.loginForm {
+    h2 {
+        font-size: 30px;
+    }
+
+    .container {
+        padding: 25px;
+        margin: 25px;
+
+        .formBtn{
+
+            .btn-theme {
+                font-size: $font-size-16;
+                margin-top: 15px;
+                padding: 10px 25px 10px 25px;
+            }
+        }
+
+        .newUser {
+            display: inline-flex;
+            align-items: center;
+            height: 50px;
+            margin: 15px 0 15px 0;
+
+            h3 {
+            font-size: $font-size-13;
+            }
+            
+            .btn-newUser {
+                display: flex;
+                align-items: center;
+                font-size: $font-size-13;
+                color: $color-theme;
+                font-weight: $font-weight-bold;
+                padding-left: 5px;
+                padding-top: 0;
+                padding-bottom: 5px;
+                
+
+
+                &:hover {
+                    font-size: $font-size-16;
+                    font-weight: $font-weight-extra-bold;
+
+                }
+
+            }
+        }
+    }
+
+}
+

@@ -19,7 +19,6 @@ export const UpdateProductSection: React.FC<UpdateProductType> = ({item}) => {
       setUpdateProduct(false)
       setUpdateProductFailed(false)
       
-      console.log("hej")
       
 
 

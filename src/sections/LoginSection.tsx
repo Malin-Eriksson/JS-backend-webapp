@@ -81,7 +81,10 @@ interface LoginDataType {
             <button type="submit" className="btn-theme">LOG IN</button>
           </div>
         </form> 
-        <NavLink className="btn-theme" to='/signup'>New user? Create an employee account here!</NavLink>
+        <div className='newUser'>
+        <h3>New user? Create an employee account</h3>
+        <NavLink className="btn-newUser" to='/signup'> HERE!</NavLink>
+        </div>
       </div>
     </section>
   )

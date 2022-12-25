@@ -1,0 +1,45 @@
+.apiSection {
+    
+    .btn-theme {
+        font-size: $font-size-16;
+        margin: 15px 0 15px 0;
+        padding: 10px 25px 10px 25px;
+    }
+
+    .container {
+
+        h1 {
+            font-size: 30px;
+            margin-top: 25px;
+        }
+
+        .manageProducts{
+            display: flex;
+            padding: 5px;
+
+            .menu-link {
+                background-color: $color-white;
+                color: $color-black;
+                width: 36px;
+                height: 36px;
+                margin-bottom: 15px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 0 10px 5px $color-shadow;
+                position: relative;
+                border: none;
+                outline: none;
+                margin: 5px;
+            
+                &:hover {
+                    color: $color-white;
+                    background-color: $color-black;    
+                }
+            }
+
+        }
+    }
+}
+
